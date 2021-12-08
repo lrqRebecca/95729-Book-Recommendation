@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block css %}
+.card
+{
+margin-bottom:20px;
+border-radius:10px;
+height:auto;
+max-height:56vh;
+overflow:hidden;
+}
+.card:hover {
+background-color:#87a4f6;
+}
+.card img {
+border-radius:10px;
+}
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+.card
+{
+margin-bottom:20px;
+border-radius:10px;
+height:auto;
+max-height:55vh;
+overflow:hidden;
+}
+}
+{% endblock css %}
+
+{% block body %}
+<div class="container">
+  <h1 class="text-center mb-2 pb-2"><u>Item Based Recommendations</u></h1>
+</div>
+<br />
+
+<div class="container-fluid px-5 mb-3 pb-3">
+    <div class="row">
+{% for book in result_item %}
+<div class="col-lg-3 col-md-4 col-sm-11">
+    <div class="card">
+      <img class="card-img-top"
+        src="{{book.image_url}}" width="150" height="200" alt="">
+        <div class="card-body">
+        <h4 class="card-title">{{book.title}}</h4>
+        <h6 class="card-text"></h6>
+        </div>
+        <div class="card-footer">
+            <h4 class="card-title">{{book.author}}</h4>
+            <h6 class="card-text"></h6>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="container">
+  <h1 class="text-center mb-2 pb-2"><u>User Based Recommendations</u></h1>
+</div>
+<br />
+<div class="container-fluid px-5 mb-3 pb-3">
+  <div class="row">
+{% for book in result_user %}
+<div class="col-lg-3 col-md-4 col-sm-11">
+  <div class="card">
+    <img class="card-img-top"
+      src="{{book.image_url}}" width="150" height="200" alt="">
+      <div class="card-body">
+      <h4 class="card-title" height = "150">{{book.title}}</h4>
+      <h6 class="card-text"></h6>
+      </div>
+      <div class="card-footer">
+          <h4 class="card-title">{{book.author}}</h4>
+          <h6 class="card-text"></h6>
+      </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
