@@ -2,7 +2,7 @@
 """
 Created on Mon Nov 29 22:54:06 2021
 
-@author: Evelyn
+@author: Evelyn Wei
 """
 
 import pandas as pd
@@ -16,7 +16,6 @@ class user_similarity:
         self.user_rating = user_input
         self.books = pd.read_csv('book_rating_clean.csv')
         self.book_info = pd.read_csv('book_author_url.csv')
-        self.book_info['Image-URL-S'] = self.book_info['Image-URL-S'].map(lambda x: x[:46])
         self. book_pivot = self.books.pivot_table(index='User-ID', columns='ISBN', values="Book-Rating")
         self.book_pivot.fillna(0, inplace=True)
         self.user_id = uuid.uuid4()
@@ -26,10 +25,10 @@ class user_similarity:
         self.model_knn = NearestNeighbors(metric = 'cosine', algorithm = 'brute') 
         self.model_knn.fit(self.book_sparse)
         
-    def findksimilarusers(self, user_id):
+    def findksimilarusers(self, user_id, k):
         similar_users = []
         similarities = []
-        distances, users = self.model_knn.kneighbors(self.book_pivot[-1:].values.reshape(1, -1), n_neighbors = 20)
+        distances, users = self.model_knn.kneighbors(self.book_pivot[-1:].values.reshape(1, -1), n_neighbors = k)
         for i in range(0, len(distances.flatten())):
             similar_users.append(self.book_pivot.index[users.flatten()[i]])
             similarities.append(1-distances.flatten()[i])
@@ -37,7 +36,7 @@ class user_similarity:
     
 
     def computeRating(self):
-        similar_users, similarities = self.findksimilarusers(self.user_id)
+        similar_users, similarities = self.findksimilarusers(self.user_id, 20)
         all_rating = pd.Series(dtype='float64')
         for i in range(len(similar_users)):
             loc = self.book_pivot.index.get_loc(similar_users[i])
