@@ -1,0 +1,51 @@
+{% extends "layout.html" %} 
+{% from "macros.html" import render_book %}
+
+{% block body %}
+<br />
+<div class="container">
+  <h1 class="text-center mb-2 pb-2"><u>Books Recommendation</u></h1>
+
+  <!-- Text Area -->
+  <div class="container-castome mx-auto">
+    <form action="{{ url_for('predict_books') }}" method="POST">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class=flashes>
+              {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          {% endwith %}
+
+
+    {% for book in begin %}
+    <div class="img-box">
+        <img src="{{ book.image_url }}" 
+          alt="" height ="150px">
+    </div>
+
+      <div class="form-group">
+        <label class="lb-lg">Title: {{book.title}}</label> <br>
+        <label class="lb-lg">Author: {{book.author}}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="{{book.isbn}}"
+          placeholder="0 - 10"
+          style="width: 80px; height: 30px;"
+        />
+      </div>
+    {% endfor %}
+    
+
+      <div class="text-center mb-5 pb-4">
+        <input type="submit" class="my-cta-button" value="Predict" />
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

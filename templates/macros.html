@@ -1,0 +1,15 @@
+{% macro render_book(book) %}
+<div class="card">
+    <img class="card-img-top" src="{{ url_for(book.image_url) }}" width="150" height="200"
+      alt="image">
+</div>
+  <div class="form-group">
+    <label class="lb-lg">{{book.title}}</label>
+    <input
+      type="text"
+      class="form-control"
+      name="rating2"
+      placeholder="rating 0 - 10"
+    />
+  </div>
+{% endmacro %}
