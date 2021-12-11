@@ -1,7 +1,16 @@
 # 95729-Book-Recommendation
 
-- Table of Content
-[ToC]
+- [Table of Content](#readme)
+  * [Design](#design)
+  * [Project Frameworks](#project-frameworks)
+  * [Start the Project](#start-the-project)
+  * [Data and Model](#data-and-model)
+    + [Dataset](#dataset)
+    + [Model](#model)
+  * [Model evaluation](#model-evaluation)
+  * [Demo of the Web Interface](#demo-of-the-web-interface)
+
+
 ## Design
 **Our User Story:** This application is designed for adult users who want to explore more books catering to their tastes. It will be able to recommend new books based on books users have read before to solve the headache of handpicking books.
 
