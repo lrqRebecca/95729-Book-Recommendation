@@ -12,5 +12,5 @@ import pandas as pd
 '''
 
 def get_sampling():
-    book_list = pd.read_csv("Begin_book_list.csv")
+    book_list = pd.read_csv("data/Begin_book_list.csv")
     return book_list.sample(n=10, replace=False).to_dict('records')

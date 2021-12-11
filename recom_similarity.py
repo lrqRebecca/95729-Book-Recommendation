@@ -14,8 +14,8 @@ from sklearn.metrics.pairwise import linear_kernel
 class book_recom_similarity:
     def __init__(self, user_input):
         self.user_rating = user_input
-        self.book_data = pd.read_csv("book_tag_data.csv")
-        self.book_info = pd.read_csv('book_author_url.csv')
+        self.book_data = pd.read_csv("data/book_tag_data.csv")
+        self.book_info = pd.read_csv('data/book_author_url.csv')
         self.tf_corpus = TfidfVectorizer(analyzer='word',ngram_range=(1, 2),min_df=0, stop_words='english')
         self.tfidf_matrix_corpus = self.tf_corpus.fit_transform(self.book_data['corpus'])
         self.cosine_sim_corpus = linear_kernel(self.tfidf_matrix_corpus, self.tfidf_matrix_corpus)

@@ -14,8 +14,8 @@ import uuid
 class user_similarity:
     def __init__(self, user_input):
         self.user_rating = user_input
-        self.books = pd.read_csv('book_rating_clean.csv')
-        self.book_info = pd.read_csv('book_author_url.csv')
+        self.books = pd.read_csv('data/book_rating_clean.csv')
+        self.book_info = pd.read_csv('data/book_author_url.csv')
         self. book_pivot = self.books.pivot_table(index='User-ID', columns='ISBN', values="Book-Rating")
         self.book_pivot.fillna(0, inplace=True)
         self.user_id = uuid.uuid4()
